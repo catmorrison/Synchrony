@@ -1,2 +1,3 @@
-# Synchrony-
+# Synchrony-project
 Synchrony project
+
