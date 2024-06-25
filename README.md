@@ -2,9 +2,9 @@
 
 Code for 'Population and demographic synchrony in European land birds'
 
-1 - Detrending.R
+1 - Detrending_prod.R 
 
-R code to create detrended estimates of annual variation in demographic rates.
+R code to create detrended estimates of annual variation in productivity.
 
 2 - Pairs.R
 
