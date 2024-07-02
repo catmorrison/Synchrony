@@ -4,7 +4,7 @@ Code for 'Population and demographic synchrony in European land birds'
 
 Code to make correlograms and estimate strength and relative scale of synchrony
 
-1 - Detrending_count.R, Detrending_productivity.R, Detrending_survival.R
+1 - Detrending_count.R, Detrending_productivity.R, Detrending_survival.R - calls bayesian survival models in: annual_survival_model_fixed.R and annual_survival_model.R 
 
 R code to create detrended estimates of annual variation in productivity.
 
