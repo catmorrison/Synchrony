@@ -1,0 +1,63 @@
+
+       model {
+  #### Priors and constraints
+  for (i in 1:n.individuals){   				
+    for (t in ff[i]:(last.year[i]-1)){ 			
+      logit(phi[i,t])<-mu.sa[t]
+      logit(p.s[i,t])<-alpha.p+siteep[site[i]] 		#### recapture probability 
+    } #t
+  } #i
+  
+  alpha.M~dbeta(1,1)			#### mean recapture probability 
+  alpha.p<-log(alpha.M/(1-alpha.M))	#### logit transformation of mean recapture probability 
+  
+  for (tt in 1:(n.years-1)){
+  mean.sa[tt]~dunif(0,1)   			#### mean survival rate 
+  mu.sa[tt]<-log(mean.sa[tt]/(1-mean.sa[tt]))	#### logit transformation of mean survival rate
+  }
+  
+  for(s in 1:n.sites){			
+    beta.p[s]~dnorm(0,0.001)T(-10, 10)  	       #### slope of seasonal recapture probability
+    siteep[s]~dnorm(0,tau.recapture)T(-10,10) #### random effect of site-level recapture probability 
+   
+  } 
+
+  
+  #### Priors for variances for random effects
+  sigma.recapture~dunif(0.0001,10)	#### site-level recapture probability
+  tau.recapture<-pow(sigma.recapture,-2)  
+  sigma2.recapture <-pow(sigma.recapture,2)
+  
+
+  
+  
+  #### Prior for residency probability 
+
+    res~dbeta(1,1) 	
+  		
+  #### Within season recapture probability 
+  for (i in 1:n.individuals){ 				
+    logit(p0[i])<-beta.p[site[i]]*visit[i] 	#### recapture probability within first season varies with visit of 1st capture 
+  }
+  
+  #### Likelihood 
+  for (i in 1:n.individuals){ 				 
+    z[i,ff[i]]<-1
+    #### Within season survival (=residency)							
+    z[i,(ff[i]+1)]~dbern(res) 	#### state process 
+    yy[i,(ff[i]+1)]~dbern(mu0[i,ff[i]]) 	#### observation process
+    mu0[i,ff[i]]<-z[i, (ff[i]+1)]*p0[i]	#### depends on the within season recapture probability 
+    
+    #### Between season survival
+    for (t in (ff[i]+2):(last.year[i]+1)){ 			      
+      z[i,t]~dbern(mu1[i,t-2])		#### state process
+      mu1[i,t-2]<-phi[i,t-2]*z[i,t-1] 	      
+      yy[i,t]~dbern(mu2[i,t-2])		#### observation process
+      mu2[i,t-2]<-p.s[i,t-2]*z[i,t]*admat[site[i],t-1]  ### admat removes missing visits
+    } #### end of t (years)
+  } #### end of i (individuals)
+} #### end of model
+       
+        
+        
+        
