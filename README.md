@@ -21,6 +21,7 @@ R code to calculate spatially explict correlograms
 4 - Add wavelet code.
 
 Data/
+
 Example data files to make correlograms and estimate strength, relative scale and timescale of synchrony.
 
 
