@@ -18,7 +18,9 @@ R code to calculate pearsons correlations between all pairs of 100km squares.
 
 R code to calculate spatially explict correlograms
 
-4 - Add wavelet code.
+4 - Wavelet analysis.R 
+
+R code to conduct the wavelet phasor mean field analysis. 
 
 Data/
 
