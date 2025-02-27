@@ -4,7 +4,7 @@
 
 library(wsyn)
 
-detrend<-read.csv('/Users/catmorrison/Dropbox/UEA/Synchrony/Paper 1/Manuscript/R code for MS/Data/detrended_count_CES.csv')
+detrend<-read.csv('./Data/detrended_count_CES.csv')
 
 ###Create N (number of 100km squares * T (years) matrix) 
 times<-max(detrend$year2)
