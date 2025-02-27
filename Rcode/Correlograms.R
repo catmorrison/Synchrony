@@ -119,6 +119,11 @@ for (ss in 1:length(sqqs)){
   
   ####Calculate the mean standard error of the scale (to use as a weight in GLMM)
   scale_se<-mean(I(pred$se.fit[1]:pred$se.fit[which(pred$dist2==scale)]))
+
+  ####Can generate the following warning which can be ignored:
+  ####"#Warning message:
+  ####In pred$se.fit[1]:pred$se.fit[which(pred$dist2 == scale)] :
+  #### numerical expression has 2 elements: only the first used"
   
   ####Calculate the strength
   newd3 <- with(dat1, data.frame(dist2 = 0))
